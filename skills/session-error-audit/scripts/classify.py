@@ -47,7 +47,9 @@ DEFAULT_NOISE = [
      'pattern': r'\b(Get-Content|Select-String|findstr)\b', 'why': 'цитаты из журнала или файла'},
 ]
 
-SEARCH_TOOLS = {'read', 'grep', 'glob', 'web_fetch', 'web_search', 'list_agents', 'job_output'}
+SEARCH_TOOLS = {'read', 'grep', 'glob', 'web_fetch', 'web_search', 'list_agents', 'job_output', 'skill'}
+# Инструменты, чей вывод - всегда чужой текст (описание навыка), а не результат команды.
+CONTENT_ONLY_TOOLS = {'skill'}
 COMMAND_TOOLS = {'pwsh', 'bash', 'pwsh-persistent', 'bash-persistent'}
 
 
@@ -97,6 +99,8 @@ def classify_row(row, rules):
         for rule, rx in rules[category]:
             if match_rule(row, rule, rx):
                 return category.upper(), rule.get('why') or ''
+    if row.get('tool') in CONTENT_ONLY_TOOLS:
+        return 'NOISE', 'текст навыка, а не вывод команды'
     if row.get('kind') == 'hard':
         return 'STRONG', 'isError или ненулевой код возврата'
     if row.get('tool') in SEARCH_TOOLS:

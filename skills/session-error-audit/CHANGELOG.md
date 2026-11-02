@@ -1,4 +1,4 @@
-# История изменений: session-error-audit
+﻿# История изменений: session-error-audit
 
 Что менялось в навыке, когда и почему. Новые записи добавляются в конец. Подробный журнал разработки лежит в репозитории
 маркетплейса: `skills-lab/session-error-audit/JOURNAL.md`, база первого аудита рядом в `baseline/2026-10-12/`. До 2026-10-15
@@ -115,3 +115,8 @@ attachment типа instructions у единственного агента Expl
 Что: скрипты переписаны под журналы DSH v4 (`tool/call`, `tool/result` с `isError`, `job/settled`, `user/message`), раскладка `%USERPROFILE%\.dsh\sessions\--<cwd>--\session-<id>\session.vN.jsonl.zstd`, распаковка Zstandard (модуль `zstandard` или `zstd.exe`) и путь через ZIP из `/export`; добавлен `session_read.py`, `rows.json`/`scan_meta.json`/`user_messages.json`, категории STRONG/SOFT/EXPECTED/NOISE с правилами по `cmd_pattern`/`not_pattern`.
 Почему: старые скрипты читали журналы Claude Code (`~/.claude/projects`, записи `assistant`/`user`), которых в DSH нет; сжатые журналы требуют многокадровой распаковки.
 Проверено: живая сессия DSH 2026-11-02, 3 журнала (основная и два подагента), 271 вызов, 34 строки, 17 настоящих, 3 ожидаемых, 14 шума; `--since`/`--until`, плохое время (код 2), пустой период (WARNING), `show.py`, `compare.py`. На других версиях DSH не проверялось.
+
+## 2026-11-02 | `skill` в SEARCH_TOOLS
+Что: результаты инструмента `skill` теперь считаются шумом, а не SOFT-сбоем: текст навыка часто содержит слова «Error», «Traceback», «FAILURE» как примеры.
+Почему: аудит limb-damage дал 3 ложных SOFT на загрузке навыков (windows-shell-dsh, neoforge-dev-experiments); из-за них доля «настоящих сбоев» была завышена (30 вместо 27).
+Проверено: classify.py на тех же rows.json (без повторного сканирования): сначала `skill` в SEARCH_TOOLS дал 29 настоящих (одна строка ещё проходила как hard), затем CONTENT_ONLY_TOOLS до проверки `kind` дал 27 настоящих (15 жёстких, 12 мягких), шум 16 -> 19, ожидаемых 2; остальные строки категорию не сменили. Журнал: skills-lab/session-error-audit/JOURNAL.md.
