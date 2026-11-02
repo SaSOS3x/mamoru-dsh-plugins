@@ -1,0 +1,16 @@
+# Python byte code: `python -m py_compile` and imports leave it next to the scripts.
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor and OS noise.
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+
+# Local installs of the skills (junctions or copies) must never be committed here.
+.dsh/
+
+# Session exports and audit work folders.
+dsh-session-*.zip

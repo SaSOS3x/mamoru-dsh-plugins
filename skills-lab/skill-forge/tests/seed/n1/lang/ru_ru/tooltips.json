@@ -1,0 +1,6 @@
+{
+  "item.mypack.wrench": "Ключ (инструмент)",
+  "tooltip.mypack.wrench": "ПКМ - повернуть машину",
+  "tooltip.mypack.press": "Нужна энергия",
+  "tooltip.mypack.manual": "Откройте, чтобы прочитать"
+}

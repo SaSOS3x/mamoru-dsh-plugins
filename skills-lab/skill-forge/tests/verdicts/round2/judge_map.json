@@ -1,0 +1,26 @@
+{
+ "s1-j1": {
+  "A": "with2",
+  "B": "without"
+ },
+ "s1-j2": {
+  "A": "without",
+  "B": "with2"
+ },
+ "s2-j1": {
+  "A": "with2",
+  "B": "without"
+ },
+ "s2-j2": {
+  "A": "without",
+  "B": "with2"
+ },
+ "n1-j1": {
+  "A": "with2",
+  "B": "without"
+ },
+ "n1-j2": {
+  "A": "without",
+  "B": "with2"
+ }
+}

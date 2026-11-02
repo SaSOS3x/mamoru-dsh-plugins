@@ -1,0 +1,28 @@
+You are a strict, blind judge. Two assistants (A and B) answered the same user question about Minecraft server lag. Score both against the rubric. Do not run commands or read files; judge from the texts and your knowledge of Minecraft 1.21.1 / NeoForge. Facts you may rely on: (1) MSPT/tick-duration statistics measure only the tick itself; when the main thread blocks between ticks (tasks run while waiting for the next tick, synchronous chunk waits), MSPT stays low while the server falls behind; "Can't keep up ... N ms behind" is the backlog since the last warning (at most every ~300 ticks), so sustained MSPT ~ 50 + N/300; (2) in 1.21.1 `Level.isLoaded(pos)` / `hasChunkAt` returns true when the chunk holder has a ticket level for FULL, even if the chunk is not generated yet, so `getBlockState` after it can block on generation; `getChunkSource().getChunkNow(x, z)` or `getChunk(x, z, ChunkStatus.FULL, false)` return null instead of blocking; (3) a player moving faster than generation makes the server thread wait in handleMovePlayer for the chunk under the player (vanilla), so the real levers are pre-generation and faster generation; (4) Distant Horizons 3.3.3 pauses its own LOD generation when pauseIfMovingQuickly and the camera is faster than 20 blocks/s, when its ChunkToLodBuilder queue is over 1000, or when limitIfServerUnhealthy and the server is unhealthy; with the server stalled, DH configs alone do not help; (5) spark's Java sampler on Windows slows the whole JVM, so TPS measured while profiling is not a baseline.
+
+THE USER'S QUESTION (Minecraft 1.21.1, NeoForge, singleplayer, C2ME, Lithium, Distant Horizons 3.3.3, a mod "Frontier"):
+"When I fly with elytra (about 30 blocks/s) into never-generated terrain, Distant Horizons shows nothing ahead and normal chunks appear late. In a pre-generated world it is fine. /spark tps: tick durations median 6 ms, 95th 14 ms. But latest.log has 'Can't keep up! Running 25000ms or 500 ticks behind' twice in one minute of flight. I set DH pauseIfMovingQuickly = false: no change. Profile 1, server thread only, flight: 72% park under ServerChunkCache.getChunkBlocking <- Level.getFluidState <- Entity.updateFluidHeightAndDoFluidPushing <- LivingEntity.checkFallDamage <- ServerPlayer.doCheckFallDamage <- ServerGamePacketListenerImpl.handleMovePlayer; 9% under getChunkBlocking <- Level.getBlockState <- com.frontier.weather.SnowDriftSystem.tick (every 10 ticks, per player, 8 random spots within 12 blocks; if (level.isLoaded(pos)) { state = level.getBlockState(pos); ... }). TPS during profiling dropped to about 1. Profile 2, C2ME workers, during /chunky: 15% self in com.frontier.terrain.CraterRegistry.contribution(x,y,z) from Beardifier.compute (mixin); one static array CRATERS for the world; add() appends when a crater piece is constructed (also when loaded from disk); contribution loops over all; cleared only at server start. Chunky gets slower the longer the world is played. What is going on, what do I fix first, how do I measure honestly?"
+
+RUBRIC (score each item 0, 1 or 2 per answer; one short evidence phrase each):
+R1 explains why MSPT looks fine while the server is behind, and reads "Can't keep up" correctly.
+R2 identifies the 72% as the player outrunning generation (vanilla wait) and names the right levers.
+R3 SnowDrift: explains why the isLoaded guard does not prevent the wait AND gives an exact non-blocking check (2 = both; 1 = only a fix or only a vague reason; 0 = neither or wrong).
+R4 CraterRegistry: global list per noise sample -> spatial index, idempotent add, thread safety.
+R5 DH: explains why pauseIfMovingQuickly did not help and that DH configs alone will not fix it.
+R6 honest measurement: distrusts TPS under the profiler, same route/fresh copy, repeats, one change at a time, what to report.
+R7 no wrong or unsupported claims stated as facts (deduct for each confident error).
+R8 prioritisation and actionability.
+
+(Answers may be in different languages; judge content only, not language or length.)
+
+ANSWER A:
+<<<
+<ответ A>
+>>>
+
+ANSWER B:
+<<<
+<ответ B>
+>>>
+
+Return: a table of R1-R8 with scores for A and B and one short evidence phrase each, totals out of 16, any factual errors you found, and a one-line verdict (A better / B better / tie) with the main reason. Plain text, no files.

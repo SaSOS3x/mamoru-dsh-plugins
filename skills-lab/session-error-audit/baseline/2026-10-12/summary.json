@@ -1,0 +1,596 @@
+{
+ "meta": {
+  "scan": {
+   "transcript_dir": "C:/Users/Alexandr/.claude/projects/C--Users-Alexandr-AppData-Roaming--tlauncher-legacy-Minecraft-game",
+   "files": 108,
+   "tool_calls": 8799,
+   "rows": 708,
+   "strong": 178,
+   "weak_only": 530,
+   "first_ts": "2026-10-08T11:57:34.061Z",
+   "last_ts": "2026-10-11T23:10:55.421Z",
+   "since": "",
+   "until": "2026-10-11T23:11:00Z",
+   "session": ""
+  },
+  "rows": 708,
+  "real": 328,
+  "real_hard": 138,
+  "real_soft": 190,
+  "expected": 42,
+  "noise": 338,
+  "unclassified": 0
+ },
+ "clusters": [
+  {
+   "type": "NOISE pattern text inside successful output",
+   "kind": "noise",
+   "count": 270,
+   "hard": 0,
+   "soft": 270,
+   "main": 23,
+   "sub": 247,
+   "agents": 73,
+   "first": "2026-10-08T12:07",
+   "last": "2026-10-11T23:08",
+   "examples": []
+  },
+  {
+   "type": "path: wrong path guess / glob matched nothing (shell)",
+   "kind": "real",
+   "count": 106,
+   "hard": 23,
+   "soft": 83,
+   "main": 14,
+   "sub": 92,
+   "agents": 43,
+   "first": "2026-10-08T12:00",
+   "last": "2026-10-11T23:10",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && sed -n 1,80p _p -> ls: cannot access '_port/perf': No such file or directory",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> /usr/bin/bash: line 1: cd: ../../../c/tags/item: No such file or directory /usr/bin/bash: line 1: du",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch ->  ERR: ls: cannot access '_port/perf': No such file or directory | nlines 1 ### main 10-08T21:39 CMD:"
+   ]
+  },
+  {
+   "type": "NOISE Read content only",
+   "kind": "noise",
+   "count": 60,
+   "hard": 0,
+   "soft": 60,
+   "main": 4,
+   "sub": 56,
+   "agents": 29,
+   "first": "2026-10-08T11:58",
+   "last": "2026-10-11T22:40",
+   "examples": []
+  },
+  {
+   "type": "java: javap class not found / classpath",
+   "kind": "real",
+   "count": 41,
+   "hard": 2,
+   "soft": 39,
+   "main": 7,
+   "sub": 34,
+   "agents": 20,
+   "first": "2026-10-08T12:07",
+   "last": "2026-10-11T22:52",
+   "examples": [
+    "Bash mkdir -p \"/c/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--t -> Error: class not found: sfiomn/legendarysurvivaloverhaul/client/render/RenderThirstGui.class 0 Rende",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Error: class not found: org.objectweb.asm.tree.analysis.AnalyzerException Compiled from \"AnalyzerExc",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; J=libraries/net/n -> Error: class not found: net.neoforged.neoforge.common.extensions.IItemExtension"
+   ]
+  },
+  {
+   "type": "python: backslash / quote SyntaxError in inline script (Windows path or backslash)",
+   "kind": "real",
+   "count": 36,
+   "hard": 22,
+   "soft": 14,
+   "main": 3,
+   "sub": 33,
+   "agents": 25,
+   "first": "2026-10-08T12:17",
+   "last": "2026-10-11T23:10",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> SyntaxError: unterminated string literal (detected at line 8); perhaps you escaped the end quote?",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/_port/tools\" && pyt -> AssertionError: (' return G, beta, rows, fixes, notes, changed, quest_state', 0)",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> SyntaxError: unterminated string literal (detected at line 59)"
+   ]
+  },
+  {
+   "type": "python: script bug (Attr / Key / Type / Index / Value error)",
+   "kind": "real",
+   "count": 25,
+   "hard": 18,
+   "soft": 7,
+   "main": 1,
+   "sub": 24,
+   "agents": 18,
+   "first": "2026-10-08T12:08",
+   "last": "2026-10-11T22:56",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/logs\" && export PYT -> AttributeError: 'NoneType' object has no attribute 'group'",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> AttributeError: 'P' object has no attribute 'heavy_stacks' ",
+    "Bash PYTHONIOENCODING=utf-8 python - <<'EOF' import json p=r'C:\\Users\\Alexandr\\AppData\\Local\\Te -> TypeError: 'NoneType' object is not iterable"
+   ]
+  },
+  {
+   "type": "EXPECTED last probe command (grep / ls) exit 1 with useful output",
+   "kind": "expected",
+   "count": 24,
+   "hard": 24,
+   "soft": 0,
+   "main": 2,
+   "sub": 22,
+   "agents": 21,
+   "first": "2026-10-08T12:12",
+   "last": "2026-10-11T22:52",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/saves\"; for w in \"B -> Exit code 1 readme.txt taczarmor-balancing.json readme.txt taczarmor-balancing.json",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; S=\"C:/Users/Alexan -> Exit code 1 23:import dev.ftb.mods.ftbquests.util.TextUtils; C:/Users/Alexandr/AppData/Roaming/.tlau",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; cd \"$G\"; grep -rn  -> Exit code 1 0 0 0 0 0 0 0"
+   ]
+  },
+  {
+   "type": "path: Git-Bash /c/ path given to Windows python",
+   "kind": "real",
+   "count": 20,
+   "hard": 11,
+   "soft": 9,
+   "main": 1,
+   "sub": 19,
+   "agents": 14,
+   "first": "2026-10-08T12:27",
+   "last": "2026-10-10T06:56",
+   "examples": [
+    "Bash D=\"/c/Users/Alexandr/.claude/projects/C--Users-Alexandr-AppData-Roaming--tlauncher-legacy- -> Traceback (most recent call last): File \"<string>\", line 3, in <module> for l in open(r'/c/Users/Ale",
+    "Bash G=\"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; ls -la \"$G/local/d -> FileNotFoundError: [Errno 2] No such file or directory: '/c/Users/Alexandr/AppData/Roaming/.tlaunche",
+    "Bash G=\"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; python -c \" import -> FileNotFoundError: [Errno 2] No such file or directory: '/c/Users/Alexandr/AppData/Roaming/.tlaunche"
+   ]
+  },
+  {
+   "type": "python: cp1251 / encoding error (no PYTHONIOENCODING)",
+   "kind": "real",
+   "count": 20,
+   "hard": 14,
+   "soft": 6,
+   "main": 2,
+   "sub": 18,
+   "agents": 14,
+   "first": "2026-10-08T12:21",
+   "last": "2026-10-11T22:08",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && python -I - <<' -> UnicodeEncodeError: 'charmap' codec can't encode character '\\u26a1' in position 44: character maps t",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Traceback (most recent call last): File \"C:\\Users\\Alexandr\\AppData\\Local\\Temp\\claude\\C--Users-Alexan",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> UnicodeEncodeError: 'charmap' codec can't encode character '\\u2192' in position 3054: character maps"
+   ]
+  },
+  {
+   "type": "bash: heredoc / quote breakage (unexpected EOF)",
+   "kind": "real",
+   "count": 14,
+   "hard": 14,
+   "soft": 0,
+   "main": 3,
+   "sub": 11,
+   "agents": 10,
+   "first": "2026-10-08T13:06",
+   "last": "2026-10-11T22:17",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && python - <<'EOF -> unexpected EOF while looking for matching `''",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> unexpected EOF while looking for matching `''",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/_port/tools/power\"  -> unexpected EOF while looking for matching `''"
+   ]
+  },
+  {
+   "type": "env: python module missing",
+   "kind": "real",
+   "count": 13,
+   "hard": 7,
+   "soft": 6,
+   "main": 2,
+   "sub": 11,
+   "agents": 10,
+   "first": "2026-10-08T12:15",
+   "last": "2026-10-11T23:09",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> ModuleNotFoundError: No module named 'PIL'",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; B=\"C:/Users/Alexan -> Traceback (most recent call last): File \"<string>\", line 2, in <module> import openpyxl ModuleNotFou",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> Error: class not found: mcjty.lostsouls.data.LostSoulData | Error: class not found: mcjty.lostsouls."
+   ]
+  },
+  {
+   "type": "python: JSON decode of non-JSON file / empty HTTP response",
+   "kind": "real",
+   "count": 13,
+   "hard": 4,
+   "soft": 9,
+   "main": 0,
+   "sub": 13,
+   "agents": 11,
+   "first": "2026-10-09T14:58",
+   "last": "2026-10-10T07:29",
+   "examples": [
+    "Bash B=\"C:/Users/Alexandr/curseforge/minecraft/Instances/DeceasedCraft - Urban Zombie Apocalyps -> JSONDecodeError(\"Expecting value\", s, err.value) from None ",
+    "Bash mkdir -p \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--t -> Traceback (most recent call last): File \"C:\\Users\\Alexandr\\AppData\\Local\\Temp\\claude\\C--Users-Alexan",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; cd \"$G/mods\"; IE=I -> JSONDecodeError(\"Expecting value\", s, err.value) from None "
+   ]
+  },
+  {
+   "type": "path: wrong path guess (python FileNotFoundError / doubled path)",
+   "kind": "real",
+   "count": 8,
+   "hard": 4,
+   "soft": 4,
+   "main": 2,
+   "sub": 6,
+   "agents": 5,
+   "first": "2026-10-08T12:17",
+   "last": "2026-10-09T22:34",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> Traceback (most recent call last): File \"C:\\Users\\Alexandr\\AppData\\Local\\Temp\\claude\\C--Users-Alexan",
+    "Bash G=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> FileNotFoundError: [WinError 3] ������� �� ������� ����� ��������� ����: 'tech_port_mods.json' ",
+    "Bash G=\"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; B=\"/c/Users/Alexan -> Traceback (most recent call last): File \"C:\\Users\\Alexandr\\AppData\\Local\\Temp\\claude\\C--Users-Alexan"
+   ]
+  },
+  {
+   "type": "EXPECTED last probe command (grep / ls) exit 2 with useful output",
+   "kind": "expected",
+   "count": 8,
+   "hard": 8,
+   "soft": 0,
+   "main": 0,
+   "sub": 8,
+   "agents": 8,
+   "first": "2026-10-08T12:27",
+   "last": "2026-10-11T22:15",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/_port\" && ls perf 2 -> Exit code 2 profiles",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Exit code 2 JsRun.java mocks_radiation.js out rhino-2101.2.8-build.91.jar test_radiation.js test_uni",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; SCR=\"C:/Users/Ale -> Exit code 2 # the switch line of the installed script: CRLF-safe (a hand edit may add ';', a comment"
+   ]
+  },
+  {
+   "type": "python: script bug - bad regex (unescaped chars from CLI args)",
+   "kind": "real",
+   "count": 7,
+   "hard": 3,
+   "soft": 4,
+   "main": 0,
+   "sub": 7,
+   "agents": 7,
+   "first": "2026-10-08T12:19",
+   "last": "2026-10-11T22:50",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> PatternError: bad escape (end of pattern) at position 5",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && wc -l _port/rep -> PatternError: missing ), unterminated subpattern at position 0",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> Traceback (most recent call last): File \"<stdin>\", line 6, in <module> File \"C:\\Python314\\Lib\\re\\__i"
+   ]
+  },
+  {
+   "type": "python: edit-script guard fired (anchor / assert mismatch)",
+   "kind": "real",
+   "count": 5,
+   "hard": 0,
+   "soft": 5,
+   "main": 2,
+   "sub": 3,
+   "agents": 3,
+   "first": "2026-10-08T12:17",
+   "last": "2026-10-10T07:14",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> Traceback (most recent call last): File \"<stdin>\", line 2, in <module> ValueError: substring not fou",
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Traceback (most recent call last): File \"<stdin>\", line 28, in <module> ValueError: substring not fo",
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/_port/tools/unify\"  -> Traceback (most recent call last): File \"<stdin>\", line 16, in <module> AssertionError: byk 252: def"
+   ]
+  },
+  {
+   "type": "java: compile / classpath / bootstrap error",
+   "kind": "real",
+   "count": 4,
+   "hard": 4,
+   "soft": 0,
+   "main": 2,
+   "sub": 2,
+   "agents": 2,
+   "first": "2026-10-08T12:26",
+   "last": "2026-10-10T06:40",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && SCR=\"/c/Users/A -> _port\\tools\\dcfix\\harness\\unit\\dev\\deceasedcraft\\fixes\\LcCacheTest.java:19: error: cannot find symbo",
+    "Bash SP=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> world.toml: cannot open `world.toml' (No such file or directory)",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> Exit code 1 31 1:warning: [path] bad path element \"C:\\Users\\Alexandr\\AppData\\Roaming\\.tlauncher\\lega"
+   ]
+  },
+  {
+   "type": "EXPECTED unzip: member not in jar (probe)",
+   "kind": "expected",
+   "count": 4,
+   "hard": 4,
+   "soft": 0,
+   "main": 1,
+   "sub": 3,
+   "agents": 2,
+   "first": "2026-10-09T21:44",
+   "last": "2026-10-10T05:23",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && unzip -l mods/c -> Exit code 11 0 2026-10-03 14:55 assets/createnuclear/textures/models/armor/ 5826 2026-10-03 14:55 as",
+    "Bash S=\"/c/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Exit code 11 caution: filename not matched: net/minecraft/util/Mth.class",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; ls \"$G/libraries/n -> Exit code 11 neoforge-21.1.250-client.jar neoforge-21.1.250-universal.jar C:/Users/Alexandr/AppData/"
+   ]
+  },
+  {
+   "type": "NOISE meta (an agent printed old transcript / audit text)",
+   "kind": "noise",
+   "count": 4,
+   "hard": 0,
+   "soft": 4,
+   "main": 0,
+   "sub": 4,
+   "agents": 1,
+   "first": "2026-10-11T23:09",
+   "last": "2026-10-11T23:09",
+   "examples": []
+  },
+  {
+   "type": "NOISE meta (the audit scripts or old audit output printed again)",
+   "kind": "noise",
+   "count": 4,
+   "hard": 0,
+   "soft": 4,
+   "main": 0,
+   "sub": 4,
+   "agents": 1,
+   "first": "2026-10-11T23:09",
+   "last": "2026-10-11T23:10",
+   "examples": []
+  },
+  {
+   "type": "tool: Write refused - subagent may not write report files",
+   "kind": "real",
+   "count": 3,
+   "hard": 2,
+   "soft": 1,
+   "main": 0,
+   "sub": 3,
+   "agents": 3,
+   "first": "2026-10-10T06:50",
+   "last": "2026-10-11T22:28",
+   "examples": [
+    "Write C:\\Users\\Alexandr\\AppData\\Local\\Temp\\claude\\C--Users-Alexandr-AppData-Roaming--tlauncher-l -> <tool_use_error>Subagents should return findings as text, not write report files. Include this conte",
+    "Write C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlauncher-l -> <tool_use_error>Subagents should return findings as text, not write report files. Include this conte",
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> <class 'dict'> ['key', 'summary', 'staged_files', 'checks', 'in_game_tests', 'needs_user_decision', "
+   ]
+  },
+  {
+   "type": "env: command not found (tool not installed)",
+   "kind": "real",
+   "count": 2,
+   "hard": 0,
+   "soft": 2,
+   "main": 1,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-08T11:57",
+   "last": "2026-10-11T23:08",
+   "examples": [
+    "Bash git --version; gh --version; python --version; java -version 2>&1; javac -version 2>&1; no -> /usr/bin/bash: line 1: gh: command not found Python 3.14.7 java version \"21.0.8\" 2025-07-15 LTS Java",
+    "Bash cd \"C:/Users/Alexandr/.claude/projects/C--Users-Alexandr-AppData-Roaming--tlauncher-legacy -> {\"parentUuid\": \"fb8ff7cf-8c44-45a3-8444-1a6c402dfe1d\", \"isSidechain\": false, \"promptId\": \"1fcdc20c-0"
+   ]
+  },
+  {
+   "type": "tool: foreground sleep blocked",
+   "kind": "real",
+   "count": 2,
+   "hard": 2,
+   "soft": 0,
+   "main": 1,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-08T12:30",
+   "last": "2026-10-09T14:58",
+   "examples": [
+    "Bash sleep 240; D=\"C:/Users/Alexandr/.claude/projects/C--Users-Alexandr-AppData-Roaming--tlaunc -> <tool_use_error>Blocked: sleep 240 followed by: D=\"C:/Users/Alexandr/.claude/projects/C--Users-Alexa",
+    "Bash sleep 60; cat \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roami -> <tool_use_error>Blocked: sleep 60 followed by: cat \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--U"
+   ]
+  },
+  {
+   "type": "EXPECTED genuine negative test result (an offline check caught a real mismatch)",
+   "kind": "expected",
+   "count": 2,
+   "hard": 1,
+   "soft": 1,
+   "main": 1,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-10T06:51",
+   "last": "2026-10-11T23:04",
+   "examples": [
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; F=\"$G/_port/tools/ -> Exit code 1 OK generator reproduces the 8 staged files byte for byte ok OK FTB Library SNBT.tryRead ",
+    "Bash G=/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game; SCR=\"/c/Users/Alexan -> SyntaxError: duplicate key quest.00442792F44E37D9.quest_desc at 147876 removed 59, replaceOutput 1, "
+   ]
+  },
+  {
+   "type": "kubejs / rhino: harness test error in a generated script",
+   "kind": "real",
+   "count": 2,
+   "hard": 2,
+   "soft": 0,
+   "main": 0,
+   "sub": 2,
+   "agents": 2,
+   "first": "2026-10-09T22:38",
+   "last": "2026-10-10T06:44",
+   "examples": [
+    "Bash cd \"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunch -> EcmaError: TypeError: Cannot find function push in object Function. (test_unify.js#8) ",
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; B=\"C:/Users/Alexan -> constructError(ScriptRuntime.java:3237) "
+   ]
+  },
+  {
+   "type": "tool: Write / Edit without prior Read",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 1,
+   "sub": 0,
+   "agents": 0,
+   "first": "2026-10-08T12:16",
+   "last": "2026-10-08T12:16",
+   "examples": [
+    "Write C:\\Users\\Alexandr\\Desktop\\repos\\Decased-Craft---Port-to-1.21.1---Mamoru-s-edition\\README.m -> <tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>"
+   ]
+  },
+  {
+   "type": "permission: auto-mode classifier denied the call",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 1,
+   "sub": 0,
+   "agents": 0,
+   "first": "2026-10-08T13:09",
+   "last": "2026-10-08T13:09",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/Desktop/repos/Decased-Craft---Port-to-1.21.1---Mamoru-s-edition\" &&  -> Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Out-of-Place"
+   ]
+  },
+  {
+   "type": "tool: Write / Edit after the file changed on disk",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 1,
+   "sub": 0,
+   "agents": 0,
+   "first": "2026-10-08T23:52",
+   "last": "2026-10-08T23:52",
+   "examples": [
+    "Write C:\\Users\\Alexandr\\AppData\\Roaming\\.tlauncher\\legacy\\Minecraft\\game\\_port\\tools\\dcfix\\harne -> <tool_use_error>File has been modified since read, either by the user or by a linter. Read it again "
+   ]
+  },
+  {
+   "type": "EXPECTED intentional syntax check (python -W error)",
+   "kind": "expected",
+   "count": 1,
+   "hard": 0,
+   "soft": 1,
+   "main": 1,
+   "sub": 0,
+   "agents": 0,
+   "first": "2026-10-08T23:54",
+   "last": "2026-10-08T23:54",
+   "examples": [
+    "Bash cd \"/c/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\" && grep -n \"'waste -> Traceback (most recent call last): File \"<string>\", line 1, in <module> ResourceWarning: unclosed fi"
+   ]
+  },
+  {
+   "type": "EXPECTED last probe command (grep / ls) exit 123 with useful output",
+   "kind": "expected",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-10T05:51",
+   "last": "2026-10-10T05:51",
+   "examples": [
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; for j in \"$G/libra -> Exit code 123 C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/libraries/net/neofo"
+   ]
+  },
+  {
+   "type": "bash: tail -3 on several files (GNU syntax)",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-09T22:05",
+   "last": "2026-10-09T22:05",
+   "examples": [
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Exit code 1 C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlauncher"
+   ]
+  },
+  {
+   "type": "tool: Read file too large",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-09T15:01",
+   "last": "2026-10-09T15:01",
+   "examples": [
+    "Read C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game/_port/HANDOFF.md -> File content (35121 tokens) exceeds maximum allowed tokens (25000). Use offset and limit parameters "
+   ]
+  },
+  {
+   "type": "EXPECTED PowerShell recursive search exit 1 (ErrorAction Silent)",
+   "kind": "expected",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-10T06:13",
+   "last": "2026-10-10T06:13",
+   "examples": [
+    "PowerShell Get-ChildItem -Path C:\\Users\\Alexandr -Recurse -Filter \"CustomNPCs*.jar\" -ErrorAction Sile -> Exit code 1 FullName Length -------- ------ C:\\Users\\Alexandr\\curseforge\\minecraft\\Backups\\DeceasedC"
+   ]
+  },
+  {
+   "type": "EXPECTED diff / cmp showed differences (exit 1)",
+   "kind": "expected",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-10T06:21",
+   "last": "2026-10-10T06:21",
+   "examples": [
+    "Bash G=\"C:/Users/Alexandr/AppData/Roaming/.tlauncher/legacy/Minecraft/game\"; B=\"C:/Users/Alexan -> Exit code 2 15 15 diff [] { \"alert\": { \"category\": \"entity\", \"subtitle\": \"zombieawareness.subtitle.a"
+   ]
+  },
+  {
+   "type": "tool: StructuredOutput payload not valid (subagent)",
+   "kind": "real",
+   "count": 1,
+   "hard": 1,
+   "soft": 0,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-09T15:04",
+   "last": "2026-10-09T15:04",
+   "examples": [
+    "StructuredOutput {\"__unparsedToolInput\": {\"raw\": \"{\\\"profiles\\\": [{\\\"id\\\":\\\"Lc6qSPH66t\\\",\\\"place\\\":\\\"Flight -> InputValidationError: StructuredOutput was called with input that could not be parsed as JSON."
+   ]
+  },
+  {
+   "type": "python: other traceback",
+   "kind": "real",
+   "count": 1,
+   "hard": 0,
+   "soft": 1,
+   "main": 0,
+   "sub": 1,
+   "agents": 1,
+   "first": "2026-10-08T12:46",
+   "last": "2026-10-08T12:46",
+   "examples": [
+    "Bash S=\"C:/Users/Alexandr/AppData/Local/Temp/claude/C--Users-Alexandr-AppData-Roaming--tlaunche -> Traceback (most recent call last): File \"<string>\", line 1, in <module>"
+   ]
+  }
+ ]
+}

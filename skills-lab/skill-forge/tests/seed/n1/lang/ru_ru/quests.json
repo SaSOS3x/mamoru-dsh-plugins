@@ -1,0 +1,10 @@
+﻿{
+  "quest.mypack.intro": "Добро пожаловать в мастерскую",
+  "quest.mypack.intro.desc": "Соберите первый пресс и сделайте пластину.",
+  "quest.mypack.press": "Первый пресс",
+  "quest.mypack.press.desc": "Поставьте пресс рядом с генератором.",
+  "quest.mypack.conveyor": "Лента",
+  "quest.mypack.conveyor.desc": "Проложите конвейер от дробилки к прессу.",
+  "quest.mypack.final": "Своя фабрика",
+  "quest.mypack.final.desc": "Запустите линию из трёх машин."
+}

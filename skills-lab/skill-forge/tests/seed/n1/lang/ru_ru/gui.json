@@ -1,0 +1,7 @@
+{
+  "gui.mypack.press.title": "Пресс",
+  "gui.mypack.press.progress": "Готово: %s%%",
+  "gui.mypack.tank.title": "Бак",
+  "gui.mypack.tank.empty": "Бак пуст",
+  "gui.mypack.generator.title": "Генератор",
+}

@@ -1,0 +1,16 @@
+{
+  "block.mypack.conveyor": "Конвейер",
+  "block.mypack.crusher": "Дробилка",
+  "block.mypack.generator": "Генератор",
+  "block.mypack.press": "Пресс",
+  "block.mypack.tank": "Бак",
+  "item.mypack.gear_gold": "Золотая шестерня",
+  "item.mypack.gear_iron": "Железная шестерня",
+  "item.mypack.manual": "Руководство механика",
+  "item.mypack.plate_steel": "Стальная пластина",
+  "item.mypack.rod_copper": "Медный стержень",
+  "item.mypack.wrench": "Ключ (инструмент)",
+  "tooltip.mypack.manual": "Откройте, чтобы прочитать",
+  "tooltip.mypack.press": "Нужна энергия",
+  "tooltip.mypack.wrench": "ПКМ - повернуть машину"
+}

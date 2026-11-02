@@ -1,0 +1,8 @@
+# Text files are LF in git AND in the working copy, whatever core.autocrlf says: an installed
+# copy and the GitHub one are then identical byte for byte.
+* text=auto eol=lf
+# Windows batch files are stored byte-exact: cmd parsing depends on CRLF, tests compare bytes.
+*.cmd -text
+*.bat -text
+# PowerShell scripts are stored byte-exact; install.ps1 is ASCII, so no BOM is needed.
+*.ps1 -text
