@@ -12,7 +12,7 @@
 
 | Было (Claude Code) | Стало (DSH) |
 |---|---|
-| `plugins/<плагин>/skills/<навык>/SKILL.md` | `skills/<навык>/SKILL.md` |
+| `plugins/<плагин>/skills/<навык>/SKILL.md` | `skills/<компонент>/<навык>/SKILL.md` |
 | Плагин как единица установки (`.claude-plugin/plugin.json`, `marketplace.json`) | npm-пакет с bundle-слоем (`dsh.bundle.patch`): один пакет на весь набор, строка `mamoru-skills` монтирует провайдер |
 | Установка через `claude plugin install` | Менеджер плагинов DSH ставит пакет из Git; альтернатива без него - ссылки в `%USERPROFILE%\.dsh\skills` (`install.ps1`) |
 

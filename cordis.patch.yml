@@ -1,8 +1,17 @@
 # Bundle layer of the mamoru-dsh-plugins package.
 #
-# The single row mounts this package as a Cordis plugin (lib/index.js): it registers a skill
-# provider that reads skills/<name>/SKILL.md and shows them in the DSH session catalog.
-# The row name is the package name, so the launcher resolves it from the installed package.
+# Two components, each mounted as its own Cordis plugin:
+#   mamoru-core       - workflow and Windows skills (journal, delegation, skill-forge, audit,
+#                       tests, shell, readable docs, browsing)
+#   mamoru-minecraft  - NeoForge 1.21.1, modpack ports, worldgen, KubeJS, TPS
+#
+# To turn a component off, add a row in your profile cordis.patch.yml:
+#   - id: mamoru-minecraft
+#     disabled: true
+#
+# The package root still exports the aggregate `mamoru-skills` plugin for old profiles.
 - insert:
-    - id: mamoru-skills
-      name: mamoru-dsh-plugins
+    - id: mamoru-core
+      name: mamoru-dsh-plugins/core
+    - id: mamoru-minecraft
+      name: mamoru-dsh-plugins/minecraft

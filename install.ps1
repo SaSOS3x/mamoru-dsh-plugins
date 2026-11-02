@@ -1,7 +1,10 @@
 # install.ps1 - install the skills of this repository into DeepSeek Harness.
 #
-# By default it creates a junction (directory link) for every skill in
-# %USERPROFILE%\.dsh\skills\<skill>. DSH scans that root and watches it, so edits in this
+# Skills live in components: skills/core/<skill> and skills/minecraft/<skill>. This script
+# installs every skill as a flat folder under %USERPROFILE%\.dsh\skills\<skill> (the
+# filesystem provider scans that root), so the component layout stays a repository detail.
+#
+# By default it creates a junction (directory link) for every skill, so edits in this
 # repository are visible without reinstalling.
 #
 #   powershell -NoProfile -File install.ps1            create or update the links
@@ -39,11 +42,17 @@ if (-not $SkillsRoot) {
     $SkillsRoot = Join-Path $dshHome 'skills'
 }
 
-$names = Get-ChildItem -LiteralPath $repoSkills -Directory |
-    Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') } |
-    ForEach-Object { $_.Name }
-if (-not $names) {
-    Write-Error "No skills found in $repoSkills (expected <skill>/SKILL.md)"
+# Flatten components: skills/<component>/<skill>/SKILL.md -> name <skill>, source <folder>.
+$skills = @()
+foreach ($group in Get-ChildItem -LiteralPath $repoSkills -Directory) {
+    foreach ($skill in Get-ChildItem -LiteralPath $group.FullName -Directory) {
+        if (Test-Path -LiteralPath (Join-Path $skill.FullName 'SKILL.md')) {
+            $skills += [pscustomobject]@{ Name = $skill.Name; Source = $skill.FullName }
+        }
+    }
+}
+if (-not $skills) {
+    Write-Error "No skills found under $repoSkills (expected skills/<component>/<skill>/SKILL.md)"
 }
 
 function Get-LinkTarget($path) {
@@ -62,28 +71,28 @@ function Get-LinkTarget($path) {
 if ($List) {
     Write-Host "Skills root: $SkillsRoot"
     if (-not (Test-Path -LiteralPath $SkillsRoot)) { Write-Host '  (root does not exist)'; return }
-    foreach ($n in $names) {
-        $target = Join-Path $SkillsRoot $n
-        if (-not (Test-Path -LiteralPath $target)) { Write-Host ("  {0,-32} missing" -f $n); continue }
+    foreach ($s in $skills) {
+        $target = Join-Path $SkillsRoot $s.Name
+        if (-not (Test-Path -LiteralPath $target)) { Write-Host ("  {0,-32} missing" -f $s.Name); continue }
         $link = Get-LinkTarget $target
-        if ($link) { Write-Host ("  {0,-32} link -> {1}" -f $n, $link) }
-        else { Write-Host ("  {0,-32} folder (copy)" -f $n) }
+        if ($link) { Write-Host ("  {0,-32} link -> {1}" -f $s.Name, $link) }
+        else { Write-Host ("  {0,-32} folder (copy)" -f $s.Name) }
     }
     return
 }
 
 if ($Remove) {
-    foreach ($n in $names) {
-        $target = Join-Path $SkillsRoot $n
+    foreach ($s in $skills) {
+        $target = Join-Path $SkillsRoot $s.Name
         if (-not (Test-Path -LiteralPath $target)) { continue }
         $link = Get-LinkTarget $target
         if ($link) {
             # Delete only the link: deleting a junction does not touch its target.
             (Get-Item -LiteralPath $target -Force).Delete()
-            Write-Host "removed link $n"
+            Write-Host "removed link $($s.Name)"
         }
         else {
-            Write-Host "skipped ${n}: not a link (a copied folder is the user's to delete)"
+            Write-Host "skipped $($s.Name): not a link (a copied folder is the user's to delete)"
         }
     }
     return
@@ -93,15 +102,15 @@ if (-not (Test-Path -LiteralPath $SkillsRoot)) {
     New-Item -ItemType Directory -Path $SkillsRoot -Force | Out-Null
 }
 
-foreach ($n in $names) {
-    $source = Join-Path $repoSkills $n
-    $target = Join-Path $SkillsRoot $n
+foreach ($s in $skills) {
+    $source = $s.Source
+    $target = Join-Path $SkillsRoot $s.Name
     if (Test-Path -LiteralPath $target) {
         $link = Get-LinkTarget $target
         $ours = $link -and ($link.TrimEnd('\') -eq $source.TrimEnd('\'))
-        if ($ours -and -not $Copy) { Write-Host "already installed: $n"; continue }
+        if ($ours -and -not $Copy) { Write-Host "already installed: $($s.Name)"; continue }
         if (-not $Force) {
-            Write-Host "skipped ${n}: $target already exists (use -Force to overwrite)"
+            Write-Host "skipped $($s.Name): $target already exists (use -Force to overwrite)"
             continue
         }
         if ($link) { (Get-Item -LiteralPath $target -Force).Delete() }
@@ -109,11 +118,11 @@ foreach ($n in $names) {
     }
     if ($Copy) {
         Copy-Item -LiteralPath $source -Destination $target -Recurse
-        Write-Host "copied: $n"
+        Write-Host "copied: $($s.Name)"
     }
     else {
         New-Item -ItemType Junction -Path $target -Target $source | Out-Null
-        Write-Host "linked: $n -> $source"
+        Write-Host "linked: $($s.Name) -> $source"
     }
 }
 
