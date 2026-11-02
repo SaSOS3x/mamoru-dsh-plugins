@@ -1,0 +1,8 @@
+# Bundle layer of the mamoru-dsh-plugins package.
+#
+# The single row mounts this package as a Cordis plugin (lib/index.js): it registers a skill
+# provider that reads skills/<name>/SKILL.md and shows them in the DSH session catalog.
+# The row name is the package name, so the launcher resolves it from the installed package.
+- insert:
+    - id: mamoru-skills
+      name: mamoru-dsh-plugins

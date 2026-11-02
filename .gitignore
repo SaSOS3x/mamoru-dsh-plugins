@@ -12,5 +12,10 @@ desktop.ini
 # Local installs of the skills (junctions or copies) must never be committed here.
 .dsh/
 
+# Node.js: dependencies and packed tarballs from local package checks.
+node_modules/
+*.tgz
+npm-debug.log*
+
 # Session exports and audit work folders.
 dsh-session-*.zip

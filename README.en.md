@@ -13,33 +13,63 @@ ignores nested trees. The three original plugins (`agent-workflow`, `minecraft-m
 
 ## Install
 
-1. Clone or copy this repository to the machine.
-2. In the repository folder:
+This repository is the npm package `mamoru-dsh-plugins`, which declares a DSH bundle
+(`"dsh": { "bundle": { "patch": "./cordis.patch.yml" } }`). Two ways work; one is enough.
 
-   ```powershell
-   powershell -NoProfile -File install.ps1
-   ```
+### Option 1: the DSH plugin manager (primary)
 
-   The script creates a junction per skill under `%USERPROFILE%\.dsh\skills`, so edits in the
-   repository are live without reinstalling. Other modes:
+1. The repository must be reachable over HTTPS (GitHub). Publishing to the npm registry is not
+   needed: installation goes straight from Git.
+2. Open DSH -> **Plugins** (or **Settings -> Plugins**) -> install a plugin from a Git repository ->
+   enter `https://github.com/SaSOS3x/mamoru-dsh-plugins`.
+3. After installation the plugin `mamoru-dsh-plugins` appears in the list and is enabled; its
+   `mamoru-skills` row registers the skills in the session catalog. Load one with `skill <name>` or
+   invoke it as `/name`.
 
-   ```powershell
-   powershell -NoProfile -File install.ps1 -List     # what is installed and where it points
-   powershell -NoProfile -File install.ps1 -Copy     # copies instead of links
-   powershell -NoProfile -File install.ps1 -Remove   # remove the links
-   ```
+Update with the **Update** button (reinstalls the latest commit of the branch) or by installing the
+same address again. Changes under `skills/` arrive with the package update.
 
-   If the execution policy blocks an unsigned script, add `-ExecutionPolicy Bypass` to the
-   command line; the file is plain text and can be read first.
-3. Open a DSH session. The skills appear in the session catalog (`available_skills`), and an open
-   session refreshes it by itself. Load one manually with `skill <name>` or invoke it as `/name`.
+The same can be done from a terminal (the same profile the app uses):
 
-Use `-SkillsRoot` to install into another root, for example `<project>\.dsh\skills`, so the skills
-apply to one project only. The same root can be set in a DSH profile as `customSkillDirs` (see
-`docs/PORTING.md`).
+```powershell
+dsh plugin --profile <profile> add https://github.com/SaSOS3x/mamoru-dsh-plugins
+```
 
-Updating: `git pull` in the repository. That is enough with links; with copies rerun
-`install.ps1 -Copy -Force`.
+### Option 2: without the plugin manager
+
+Junctions per skill under `%USERPROFILE%\.dsh\skills`: DSH scans that root and watches it, so edits
+in the repository are live without reinstalling.
+
+```powershell
+powershell -NoProfile -File install.ps1
+```
+
+Other modes:
+
+```powershell
+powershell -NoProfile -File install.ps1 -List     # what is installed and where it points
+powershell -NoProfile -File install.ps1 -Copy     # copies instead of links
+powershell -NoProfile -File install.ps1 -Remove   # remove the links
+```
+
+If the execution policy blocks an unsigned script, add `-ExecutionPolicy Bypass` to the command
+line; the file is plain text and can be read first. `-SkillsRoot` installs into another root, for
+example `<project>\.dsh\skills`, so the skills apply to one project only.
+
+Do not use both options at once: the skills would be listed twice (the filesystem provider wins over
+the package provider, but the duplication is still confusing).
+
+### Package layout
+
+| File | Role |
+|---|---|
+| `package.json` | name, version, `exports`, `files`, and the bundle declaration `dsh.bundle.patch` |
+| `cordis.patch.yml` | the bundle layer: inserts the `mamoru-skills` row that mounts the package as a plugin |
+| `lib/index.js` | the skill provider: reads `skills/<name>/SKILL.md`, serves the catalog and bodies per the `@deepseek-ai/dsh-skill` contract |
+| `skills/` | the skills themselves, packed whole with `scripts/`, `references/` and `tests/` |
+
+The package has no dependencies: the provider uses Node built-ins only, so a Git install pulls
+nothing from the registry.
 
 ## Skills
 

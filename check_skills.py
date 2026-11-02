@@ -8,12 +8,15 @@
   2. Ни в одном SKILL.md не осталось переменных и путей Claude Code (CLAUDE_SKILL_DIR,
      CLAUDE_PLUGIN_ROOT, ~/.claude, .claude/skills, claude plugin).
   3. Относительные пути к файлам навыка (scripts/..., references/..., assets/...) существуют.
-  4. Перед коммитом: у каждого изменённого навыка есть новая запись в его CHANGELOG.md
+  4. Обвязка npm-пакета: package.json с dsh.bundle.patch, сам patch-файл, lib/index.js и `files`,
+     которые включают skills/ (без них менеджер плагинов DSH поставит пустую посылку).
+  5. Перед коммитом: у каждого изменённого навыка есть новая запись в его CHANGELOG.md
      (правило исходного репозитория; отключается ключом --no-git).
 
 Запуск: python check_skills.py [--no-git]
 Коды: 0 - всё в порядке, 1 - есть замечания, 2 - git недоступен.
 """
+import json
 import os
 import re
 import subprocess
@@ -86,6 +89,74 @@ def check_skill(skill_name):
         fail(f'skills/{skill_name}: нет CHANGELOG.md')
 
 
+def check_package(names):
+    """Проверить обвязку, по которой менеджер плагинов DSH ставит пакет из Git."""
+    path = os.path.join(ROOT, 'package.json')
+    if not os.path.isfile(path):
+        fail('package.json: нет файла (менеджер плагинов не увидит bundle)')
+        return
+    try:
+        with open(path, encoding='utf-8') as f:
+            manifest = json.load(f)
+    except ValueError as e:
+        fail(f'package.json: невалидный JSON ({e})')
+        return
+
+    if not manifest.get('name'):
+        fail('package.json: нет name')
+    if not manifest.get('version'):
+        fail('package.json: нет version (менеджер плагинов сравнивает версии при обновлении)')
+
+    bundle = (manifest.get('dsh') or {}).get('bundle') or {}
+    patch = bundle.get('patch')
+    if not patch:
+        fail('package.json: нет dsh.bundle.patch (ошибка "declares no bundle")')
+    else:
+        patches = [patch] if isinstance(patch, str) else patch
+        if not all(isinstance(p, str) for p in patches):
+            fail('package.json: dsh.bundle.patch должен быть строкой или списком строк')
+        else:
+            for p in patches:
+                if not os.path.isfile(os.path.join(ROOT, p)):
+                    fail(f'package.json: dsh.bundle.patch ссылается на {p}, файла нет')
+
+    main = manifest.get('main')
+    if not main or not os.path.isfile(os.path.join(ROOT, main)):
+        fail(f'package.json: main "{main}" не указывает на существующий файл')
+
+    files = manifest.get('files')
+    if not isinstance(files, list):
+        fail('package.json: нет files (npm pack может не положить навыки в пакет)')
+    else:
+        joined = ' '.join(files)
+        if 'skills' not in joined:
+            fail('package.json: files не включают skills/ — установленный пакет будет без навыков')
+        if main and main not in files:
+            fail(f'package.json: files не включают {main}')
+
+    engines = (manifest.get('engines') or {}).get('dsh')
+    if not engines:
+        print('WARN package.json: не объявлен engines.dsh (совместимость с DSH не проверяется)')
+
+    # Слой bundle должен монтировать сам пакет по имени.
+    patch_file = patches[0] if patch and isinstance(patch, str) else None
+    if patch_file and os.path.isfile(os.path.join(ROOT, patch_file)):
+        text = open(os.path.join(ROOT, patch_file), encoding='utf-8').read()
+        package_name = manifest.get('name')
+        if 'insert:' not in text:
+            fail(f'{patch_file}: нет секции insert: (слой ничего не монтирует)')
+        if package_name and package_name not in text:
+            fail(f'{patch_file}: не монтирует пакет {package_name!r} (строка name:)')
+
+    # Провайдер обязан видеть каждый навык: имена из папок он и так читает, но пусть промах
+    # в имени файла ловится здесь, а не при старте DSH.
+    if not os.path.isfile(os.path.join(ROOT, 'lib', 'index.js')):
+        fail('lib/index.js: нет провайдера навыков')
+    for n in names:
+        if not os.path.isfile(os.path.join(SKILLS, n, 'SKILL.md')):
+            fail(f'skills/{n}: нет SKILL.md')
+
+
 def check_changelog_rule():
     def git(*args, allow_fail=False):
         r = subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True,
@@ -118,6 +189,7 @@ def main():
         return 1
     for n in names:
         check_skill(n)
+    check_package(names)
     if '--no-git' not in args:
         check_changelog_rule()
     for p in problems:
