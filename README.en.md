@@ -23,7 +23,7 @@ This repository is the npm package `mamoru-dsh-plugins`, which declares a DSH bu
 2. Open DSH -> **Plugins** (or **Settings -> Plugins**) -> install a plugin from a Git repository ->
    enter `https://github.com/SaSOS3x/mamoru-dsh-plugins`.
 3. After installation the plugin `mamoru-dsh-plugins` appears in the list and is enabled; its
-   `mamoru-core` and `mamoru-minecraft` rows register the skills in the session catalog. Load one with `skill <name>` or
+   `preset-mamoru-work` and `preset-mamoru-minecraft-work` rows add the modes; enable them in the plugin card. Load a skill with `skill <name>` or
    invoke it as `/name`.
 
 Update with the **Update** button (reinstalls the latest commit of the branch) or by installing the
@@ -64,7 +64,7 @@ the package provider, but the duplication is still confusing).
 | File | Role |
 |---|---|
 | `package.json` | name, version, `exports`, `files`, and the bundle declaration `dsh.bundle.patch` |
-| `cordis.patch.yml` | the bundle layer: inserts two plugins, `mamoru-core` and `mamoru-minecraft` |
+| `cordis.patch.yml` | the bundle layer: inserts two modes, `preset-mamoru-work` and `preset-mamoru-minecraft-work` |
 | `lib/core.js`, `lib/minecraft.js` | component providers: read `skills/<component>/<skill>/SKILL.md` |
 | `lib/provider.js` | shared provider code (frontmatter, catalog, body loading per the `@deepseek-ai/dsh-skill` contract) |
 | `lib/index.js` | aggregate `mamoru-skills` plugin for old profiles: registers both components |
@@ -73,25 +73,21 @@ the package provider, but the duplication is still confusing).
 The package has no dependencies: the provider uses Node built-ins only, so a Git install pulls
 nothing from the registry.
 
-## Components
+## Modes and components
 
-One package, but inside it mounts **two separate plugins**:
+One package, but it adds **two agent presets**, and each preset mounts its own skills:
 
-| Component | Profile id | What is inside |
+| Mode | Profile id | Skills inside |
 |---|---|---|
-| `core` | `mamoru-core` | workflow and Windows: journal, delegation, skill-forge, audit, mutations, shell, docs, browsing |
-| `minecraft` | `mamoru-minecraft` | NeoForge 1.21.1, pack ports, worldgen, KubeJS, TPS |
+| `mamoru-work` | `preset-mamoru-work` | `core` only: journal, delegation, skill-forge, audit, tests, shell, docs, browsing |
+| `mamoru-minecraft-work` | `preset-mamoru-minecraft-work` | `core` + `minecraft`: NeoForge 1.21.1, pack ports, worldgen, KubeJS, TPS |
 
-Turn a component off in your profile `cordis.patch.yml`:
+A preset mounts its skill provider in its own scope, so `mamoru-work` does not see Minecraft skills,
+while `mamoru-minecraft-work` sees both components. The shipped Standard, PTC, Minimal and Creator
+modes do not load these skills: they have their own tool sets and prompts.
 
-```yaml
-- id: mamoru-minecraft
-  disabled: true
-```
-
-The whole package is still installed, but the `minecraft` skills never reach the session catalog.
-The components are independent: separate providers, non-overlapping skill names. Old profiles with
-the `mamoru-skills` id keep working through the aggregate `lib/index.js`.
+Enable the modes in Plugins → `mamoru-dsh-plugins` (new rows are off by default), then pick the mode
+for a new task.
 
 ## Skills
 

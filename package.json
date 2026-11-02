@@ -1,7 +1,7 @@
 {
   "name": "mamoru-dsh-plugins",
-  "version": "1.1.0",
-  "description": "Mamoru's skills for DeepSeek Harness, split into installable components: core (journal, delegation, skill-forge, audit, tests, Windows shell) and minecraft (NeoForge 1.21.1, modpack ports, worldgen, KubeJS, TPS).",
+  "version": "1.2.0",
+  "description": "Mamoru skills for DeepSeek Harness: core and minecraft components plus two agent presets (mamoru-work, mamoru-minecraft-work).",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
