@@ -89,6 +89,11 @@ modes do not load these skills: they have their own tool sets and prompts.
 Enable the modes in Plugins → `mamoru-dsh-plugins` (new rows are off by default), then pick the mode
 for a new task.
 
+Compatibility: DSH 0.2.2 dropped the `@deepseek-ai/dsh-tool-subagent-control/list-agents` subpath;
+child discovery now ships inside `dsh-tool-subagent-control`. 1.2.1 removes that row from both
+modes. While the row is present (DSH 0.2.1 and older), the mode counts as broken: DSH hides it from
+the mode picker and refuses to open sessions recorded under it.
+
 ## Skills
 
 | Group | Skill | Turns on for |
