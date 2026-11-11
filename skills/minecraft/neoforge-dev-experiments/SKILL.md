@@ -107,6 +107,11 @@ differ, unless the check is about it: the seed, peaceful, noon with `RULE_DAYLIG
 - Modal screens are answered by the tour. A world made on a dedicated server with datapack dimensions opens "Worlds using
   Experimental Settings" (`BackupConfirmScreen`): press its button whose translation key is `selectWorld.backupJoinSkipButton`
   ("I know what I'm doing"). The onboarding screen is prevented by options.txt.
+- One gate for every experiment, not `scenarioA || scenarioB` inside the client tour. Put
+  `isExperimentEnabled()` over all scenario properties in the client class and register the same modal-screen
+  handler for all of them. A third scenario (`perf`, `mob-sweep`, a new load test) that is added only to the server
+  side will stop on the experimental-world screen, and the run has **no result**. Test the new property with the
+  modal handler before measuring. If the screen is visible in an unattended run, fix the gate; do not click it by hand.
 - One `finish()` that every exit goes through: write `<run folder>/<experiment>/summary.txt` (one line per check, the last one
   `RESULT PASS` or `RESULT FAIL <n>`), start the exit watchdog, `mc.stop()`. Numbers in `Locale.ROOT` (a decimal comma of a
   Russian locale spoiled a run). Put the event's time into the line itself: summary lines logged by `finish()` carry its time.
@@ -168,10 +173,14 @@ with the same state machine (sections 5-8). Checked in one project (Sengoku Jida
   java process with `--launchTarget forgeclient`; TLauncher itself is a java process too), put the bench `-D` properties right
   after the java executable and `--quickPlaySingleplayer <world folder>` at the end. TLauncher's natives stay in
   `versions/<version>/natives`. Capture again after a NeoForge or launcher update; the line holds an access token: not in git.
-- The bench mod sits in `mods/` only for the run (copied before, removed in `finally`), so normal play stays clean; the mod also
-  does nothing without its `-D` property. Back up options.txt, set `soundCategory_master:0.0`, put the backup back after the run
-  (the user asked for silence; checked 0.0 during, the user's value after). The launcher opens a small window (925x530 there):
-  `GLFW.glfwMaximizeWindow(mc.getWindow().getWindow())` gives the same size every run; write it into the summary.
+- The bench mod sits in `mods/` only for the run, so normal play stays clean; the mod also
+  does nothing without its `-D` property. **Always overwrite a same-name jar, and keep the old bytes for `finally`.** A runner
+  that does `if not exists: copy` measured an old `0.6.0` jar after the code changed: the log said 0.6.0, but the new scenario
+  class was missing and the run produced no summary. Print the requested jar's SHA-256 and size before launch. Back up
+  options.txt; set `soundCategory_master:0.0` **and** `pauseOnLostFocus:false` (the server pauses without focus, so no tick
+  scenario runs and `PerfScenario` never fires), then put the original bytes back after the run. The launcher opens a small
+  window (925x530 there): `GLFW.glfwMaximizeWindow(mc.getWindow().getWindow())` gives the same size every run; write it into the
+  summary.
 - A fresh copy of a template world each run (the user's world without region/, entities/, poi/ and the Distant Horizons
   database). Copies keep the template's level name, and the user, playing a manual check from the world list, opened the
   original instead of the copy: let the runner open the folder by quick play.
