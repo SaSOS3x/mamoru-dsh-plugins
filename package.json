@@ -1,6 +1,6 @@
 {
   "name": "mamoru-dsh-plugins",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Mamoru skills for DeepSeek Harness: core and minecraft components plus two agent presets (mamoru-work, mamoru-minecraft-work).",
   "type": "module",
   "main": "lib/index.js",

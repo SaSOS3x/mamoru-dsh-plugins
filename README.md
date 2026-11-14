@@ -3,7 +3,7 @@
 [English version](README.en.md)
 
 Порт моих навыков из [mamoru-claude-plugins](https://github.com/SaSOS3x/mamoru-claude-plugins)
-(маркетплейс плагинов Claude Code) в **DeepSeek Harness**. Семнадцать навыков, собранных на реальной
+(маркетплейс плагинов Claude Code) в **DeepSeek Harness**. Девятнадцать навыков, собранных на реальной
 работе: порт сборки DeceasedCraft на NeoForge 1.21.1, мод Space Journey, большие .bat-скрипты для
 Windows, длинные проекты с подагентами и поиск товаров на маркетплейсах.
 
@@ -116,6 +116,7 @@ DSH убирает его из выбора режимов и не открыв�
 | | `minecraft-worldgen-density-1-21` | рельеф: density-функции, TerraBlender, замер без запуска игры |
 | | `tps-optimization-neoforge` | лаги: spark, поиск причины, отчёт до/после |
 | | `neoforge-dev-experiments` | автотесты своего мода в Gradle dev-прогонах |
+| | `sinytra-connector-server-patch` | серверный патч Fabric-мода под NeoForge через Connector: ITransformer, миксины, accessor, DSBG |
 | core | `readable-docs` | тексты для людей и оформление отчёта в docx |
 | | `windows-shell-dev` | большие .bat/.cmd со встроенным PowerShell |
 

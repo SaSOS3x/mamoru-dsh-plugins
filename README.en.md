@@ -3,7 +3,7 @@
 [Русская версия](README.md)
 
 A port of my [mamoru-claude-plugins](https://github.com/SaSOS3x/mamoru-claude-plugins) skills
-(a Claude Code plugin marketplace) to **DeepSeek Harness**. Seventeen skills grown out of real
+(a Claude Code plugin marketplace) to **DeepSeek Harness**. Nineteen skills grown out of real
 work: porting the DeceasedCraft modpack to Minecraft 1.21.1 NeoForge, the Space Journey mod, large
 Windows batch scripts, long projects with subagents, and looking up prices on marketplaces.
 
@@ -113,6 +113,7 @@ the mode picker and refuses to open sessions recorded under it.
 | | `minecraft-worldgen-density-1-21` | terrain: density functions, TerraBlender, measuring without starting the game |
 | | `tps-optimization-neoforge` | lag: spark profiles, cause, before/after report |
 | | `neoforge-dev-experiments` | autotests of your own mod in Gradle dev runs |
+| | `sinytra-connector-server-patch` | server patch for a Fabric mod on NeoForge via Connector: ITransformer, mixins, accessor, DSBG |
 | core | `readable-docs` | texts for people and the layout of a student report in docx |
 | | `windows-shell-dev` | large .bat/.cmd scripts with embedded PowerShell |
 
